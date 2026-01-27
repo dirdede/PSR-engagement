@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leaderboard PSR Engagement Games</title>
+  <title>Leaderboard PSR Engagement Game</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="header">
-    <h1>🏆 Leaderboard PSR Engagement Games</h1>
+    <h1>
+      🏆 Leaderboard<br>
+      <span>PSR Engagement Game</span>
+    </h1>
   </header>
 
   <main class="container">
-    <div class="table-wrapper">
-      <table id="leaderboard">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Nama</th>
-            <th>Warna</th>
-            <th>Shape</th>
-            <th>Grup</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="loading">Loading data...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- DESKTOP TABLE -->
+    <table id="leaderboard-desktop">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Nama</th>
+          <th>Warna</th>
+          <th>Shape</th>
+          <th>Grup</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- MOBILE CARDS -->
+    <div id="leaderboard-mobile"></div>
   </main>
 
   <script src="script.js"></script>
