@@ -1,7 +1,9 @@
 :root {
   --dark-blue: #0a2540;
   --light-blue: #eef4ff;
+  --soft-blue: #f3f7ff;
   --yellow: #ffcc00;
+  --soft-yellow: #fff1b8;
   --white: #ffffff;
 }
 
@@ -84,12 +86,13 @@ body {
   }
 
   .card {
-    background: white;
-    border-radius: 14px;
-    padding: 14px 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: var(--white);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
   }
 
+  /* 🥇 RANK 1 CARD */
   .card.rank-1 {
     background-color: var(--yellow);
   }
@@ -98,23 +101,30 @@ body {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 0.95rem;
   }
 
-  /* 🔥 PERUBAHAN UTAMA DI SINI */
+  /* ===== BOX BARIS WARNA/SHAPE/GRUP ===== */
   .card-body {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* SATU BARIS */
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     text-align: center;
     font-size: 0.85rem;
   }
 
+  /* DEFAULT (RANK > 1) */
   .card-body div {
-    background: rgba(255,255,255,0.6);
-    padding: 6px 4px;
-    border-radius: 8px;
+    background: var(--soft-blue);
+    padding: 8px 6px;
+    border-radius: 10px;
     font-weight: 500;
+  }
+
+  /* KHUSUS RANK 1 */
+  .card.rank-1 .card-body div {
+    background: var(--soft-yellow);
+    font-weight: 600;
   }
 }
