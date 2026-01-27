@@ -107,4 +107,10 @@ body {
     margin-bottom: 8px;
   }
 
-  .c
+  .card-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 0.9rem;
+    gap: 6px 12px;
+  }
+}
