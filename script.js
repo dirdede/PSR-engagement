@@ -1,40 +1,103 @@
-const sheetId = "1xSS-6YMGPDCcuIWax9pe_VI9dvH5aUPS5VzKRe_Vfyc";
-const sheetName = "Rekap";
-const range = "I1:M19";
+:root {
+  --white: #ffffff;
+  --dark-blue: #0a2540;
+  --light-blue: #eaf2ff;
+  --yellow: #ffcc00;
+  --orange: #ff8c00;
+}
 
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?sheet=${sheetName}&range=${range}`;
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-fetch(url)
-  .then(res => res.text())
-  .then(data => {
-    const json = JSON.parse(data.substring(47).slice(0, -2));
-    const rows = json.table.rows;
+body {
+  margin: 0;
+  background-color: var(--light-blue);
+  color: var(--dark-blue);
+}
 
-    const tbody = document.querySelector("#leaderboard tbody");
-    tbody.innerHTML = "";
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, var(--dark-blue), #123c6a);
+  color: white;
+  padding: 20px 12px;
+  text-align: center;
+}
 
-    rows.forEach((row, index) => {
-      if (!row.c) return;
+.header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
 
-      const tr = document.createElement("tr");
+/* ===== CONTAINER ===== */
+.container {
+  padding: 12px;
+}
 
-      if (index === 0) tr.classList.add("rank-1");
+/* ===== TABLE WRAPPER (SCROLL HP) ===== */
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
 
-      tr.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${row.c[0]?.v || ""}</td>
-        <td>${row.c[1]?.v || 0}</td>
-        <td>${row.c[2]?.v || 0}</td>
-        <td>${row.c[3]?.v || 0}</td>
-        <td><strong>${row.c[4]?.v || 0}</strong></td>
-      `;
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  min-width: 600px; /* agar bisa scroll di HP */
+  border-collapse: collapse;
+}
 
-      tbody.appendChild(tr);
-    });
-  })
-  .catch(error => {
-    console.error(error);
-    document.querySelector("#leaderboard tbody").innerHTML =
-      `<tr><td colspan="6">Gagal memuat data</td></tr>`;
-  });
+thead {
+  background-color: var(--dark-blue);
+  color: white;
+}
 
+th, td {
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* ===== ROW STYLE ===== */
+tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f7faff;
+}
+
+/* ===== ONLY RANK 1 HIGHLIGHT ===== */
+.rank-1 {
+  background-color: var(--yellow);
+  font-weight: 700;
+}
+
+/* ===== LOADING ===== */
+.loading {
+  padding: 20px;
+  text-align: center;
+}
+
+/* ===== DESKTOP UPGRADE ===== */
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  th, td {
+    font-size: 0.95rem;
+    padding: 14px;
+  }
+
+  table {
+    min-width: 100%;
+  }
+}
