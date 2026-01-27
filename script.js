@@ -26,7 +26,7 @@ fetch(url)
       const total = row.c[4]?.v || 0;
       const rank = index + 1;
 
-      /* ===== DESKTOP ROW ===== */
+      /* ===== DESKTOP ===== */
       const tr = document.createElement("tr");
       if (index === 0) tr.classList.add("rank-1");
 
@@ -40,7 +40,7 @@ fetch(url)
       `;
       tbody.appendChild(tr);
 
-      /* ===== MOBILE CARD ===== */
+      /* ===== MOBILE ===== */
       const card = document.createElement("div");
       card.className = "card";
       if (index === 0) card.classList.add("rank-1");
