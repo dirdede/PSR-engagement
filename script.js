@@ -19,8 +19,6 @@ fetch(url)
       const tr = document.createElement("tr");
 
       if (index === 0) tr.classList.add("rank-1");
-      if (index === 1) tr.classList.add("rank-2");
-      if (index === 2) tr.classList.add("rank-3");
 
       tr.innerHTML = `
         <td>${index + 1}</td>
@@ -39,3 +37,4 @@ fetch(url)
     document.querySelector("#leaderboard tbody").innerHTML =
       `<tr><td colspan="6">Gagal memuat data</td></tr>`;
   });
+
