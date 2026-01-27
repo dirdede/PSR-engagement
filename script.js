@@ -10,8 +10,11 @@ fetch(url)
     const json = JSON.parse(text.substring(47).slice(0, -2));
     const rows = json.table.rows;
 
-    const tbody = document.querySelector("#leaderboard tbody");
+    const tbody = document.querySelector("#leaderboard-desktop tbody");
+    const mobile = document.querySelector("#leaderboard-mobile");
+
     tbody.innerHTML = "";
+    mobile.innerHTML = "";
 
     rows.forEach((row, index) => {
       if (!row.c) return;
@@ -21,28 +24,42 @@ fetch(url)
       const shape = row.c[2]?.v || 0;
       const grup = row.c[3]?.v || 0;
       const total = row.c[4]?.v || 0;
+      const rank = index + 1;
 
+      /* ===== DESKTOP ROW ===== */
       const tr = document.createElement("tr");
-
-      // Hanya rank 1 yang beda warna
-      if (index === 0) {
-        tr.classList.add("rank-1");
-      }
+      if (index === 0) tr.classList.add("rank-1");
 
       tr.innerHTML = `
-        <td>${index + 1}</td>
+        <td>${rank}</td>
         <td>${nama}</td>
         <td>${warna}</td>
         <td>${shape}</td>
         <td>${grup}</td>
         <td><strong>${total}</strong></td>
       `;
-
       tbody.appendChild(tr);
+
+      /* ===== MOBILE CARD ===== */
+      const card = document.createElement("div");
+      card.className = "card";
+      if (index === 0) card.classList.add("rank-1");
+
+      card.innerHTML = `
+        <div class="card-header">
+          <span>#${rank} ${nama}</span>
+          <span>Total: ${total}</span>
+        </div>
+        <div class="card-body">
+          <div>Warna: ${warna}</div>
+          <div>Shape: ${shape}</div>
+          <div>Grup: ${grup}</div>
+        </div>
+      `;
+      mobile.appendChild(card);
     });
   })
-  .catch(error => {
-    console.error(error);
-    document.querySelector("#leaderboard tbody").innerHTML =
-      `<tr><td colspan="6">Gagal memuat data</td></tr>`;
+  .catch(() => {
+    document.querySelector("#leaderboard-mobile").innerHTML =
+      "<p>Gagal memuat data</p>";
   });
