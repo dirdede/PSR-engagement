@@ -1,6 +1,16 @@
 const sheetId = "1xSS-6YMGPDCcuIWax9pe_VI9dvH5aUPS5VzKRe_Vfyc";
 
-const dataRange = "Rekap!I1:O19";   // tambah kolom hadiah
+/*
+  I2:O20
+  - I = Nama
+  - J = Warna
+  - K = Shape
+  - L = Grup
+  - M = Total
+  - O = Hadiah
+  Total: 19 peserta
+*/
+const dataRange = "Rekap!I2:O20";
 const controlRange = "Rekap!R2";
 
 const dataUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?range=${dataRange}`;
@@ -16,7 +26,8 @@ Promise.all([
   const rows = dataJson.table.rows;
 
   const controlJson = JSON.parse(controlText.substring(47).slice(0, -2));
-  const showHadiah = (controlJson.table.rows[0]?.c[0]?.v || "").toLowerCase() === "show";
+  const showHadiah =
+    (controlJson.table.rows[0]?.c[0]?.v || "").toLowerCase() === "show";
 
   const tbody = document.querySelector("#leaderboard-desktop tbody");
   const mobile = document.querySelector("#leaderboard-mobile");
@@ -25,7 +36,7 @@ Promise.all([
   tbody.innerHTML = "";
   mobile.innerHTML = "";
 
-  /* Tambah kolom header Hadiah jika Show */
+  /* Tambah kolom Hadiah di desktop jika Show */
   if (showHadiah) {
     const th = document.createElement("th");
     th.textContent = "Hadiah";
@@ -40,7 +51,7 @@ Promise.all([
     const shape  = row.c[2]?.v || 0;
     const grup   = row.c[3]?.v || 0;
     const total  = row.c[4]?.v || 0;
-    const hadiah = row.c[6]?.v || ""; // kolom O
+    const hadiah = row.c[6]?.v || "";
     const rank   = index + 1;
 
     /* ===== DESKTOP ===== */
@@ -69,9 +80,8 @@ Promise.all([
     card.className = "card";
     if (index === 0) card.classList.add("rank-1");
 
-    const namaMobile = showHadiah && hadiah
-      ? `${nama} (${hadiah})`
-      : nama;
+    const namaMobile =
+      showHadiah && hadiah ? `${nama} (${hadiah})` : nama;
 
     card.innerHTML = `
       <div class="card-header">
